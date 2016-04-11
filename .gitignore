@@ -243,3 +243,6 @@ GameEngine/
 
 *.tlog
 *.vcxproj
+/First Game
+/Klaoude Game + Engine.VC.db
+/Klaoude Game + Engine.sln
