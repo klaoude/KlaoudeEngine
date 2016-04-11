@@ -42,6 +42,9 @@ namespace KlaoudeEngine
 
 	void AudioEngine::init()
 	{
+		if (m_isInit)
+			fatalError("Tried to init audio engine twice !");
+
 		if (Mix_Init(MIX_INIT_OGG | MIX_INIT_FLAC | MIX_INIT_MOD | MIX_INIT_MP3) == -1)
 			fatalError("Mix_Init error: " + std::string(Mix_GetError()));
 
@@ -56,6 +59,18 @@ namespace KlaoudeEngine
 		if(m_isInit)
 		{
 			m_isInit = false;
+
+			for (auto& it : m_effectMap)
+				Mix_FreeChunk(it.second);
+
+			for (auto& it : m_musicMap)
+				Mix_FreeMusic(it.second);
+
+			m_effectMap.clear();
+			m_musicMap.clear();
+
+			Mix_CloseAudio();
+
 			Mix_Quit();
 		}
 	}
