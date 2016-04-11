@@ -2,7 +2,7 @@
 
 namespace KlaoudeEngine
 {
-	InputManager::InputManager() : _mouseCoords(0.0f)
+	InputManager::InputManager() : m_mouseCoords(0.0f)
 	{
 
 	}
@@ -14,30 +14,30 @@ namespace KlaoudeEngine
 
 	void InputManager::update()
 	{
-		for (auto& it : _keyMap)
-			_previusKeyMap[it.first] = it.second;
+		for (auto& it : m_keyMap)
+			m_previusKeyMap[it.first] = it.second;
 	}
 
 	void InputManager::pressKey(unsigned int keyID)
 	{
-		_keyMap[keyID] = true;
+		m_keyMap[keyID] = true;
 	}
 
 	void InputManager::releaseKey(unsigned int keyID)
 	{
-		_keyMap[keyID] = false;
+		m_keyMap[keyID] = false;
 	}
 
 	void InputManager::setMouseCoords(float x, float y)
 	{
-		_mouseCoords.x = x;
-		_mouseCoords.y = y;
+		m_mouseCoords.x = x;
+		m_mouseCoords.y = y;
 	}
 
 	bool InputManager::isKeyDown(unsigned int keyID)
 	{
-		auto it = _keyMap.find(keyID);
-		return it != _keyMap.end() ? it->second : false;
+		auto it = m_keyMap.find(keyID);
+		return it != m_keyMap.end() ? it->second : false;
 	}
 
 	bool InputManager::isKeyPressed(unsigned int keyID)
@@ -47,7 +47,7 @@ namespace KlaoudeEngine
 
 	bool InputManager::wasKeyDown(unsigned int keyID)
 	{
-		auto it = _previusKeyMap.find(keyID);
-		return it != _previusKeyMap.end() ? it->second : false;
+		auto it = m_previusKeyMap.find(keyID);
+		return it != m_previusKeyMap.end() ? it->second : false;
 	}
 }

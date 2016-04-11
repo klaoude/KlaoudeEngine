@@ -18,11 +18,11 @@ namespace KlaoudeEngine
 		void draw();
 
 	private:
-		float _x;
-		float _y;
-		float _witdh;
-		float _height;
-		GLuint _vboID;
-		GLTexture _texture;
+		float m_x;
+		float m_y;
+		float m_witdh;
+		float m_height;
+		GLuint m_vboID;
+		GLTexture m_texture;
 	};
 }

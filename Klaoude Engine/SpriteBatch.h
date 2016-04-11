@@ -82,13 +82,13 @@ namespace KlaoudeEngine
 		static bool compareBackToFront(Glyph* a, Glyph* b);
 		static bool compareTexture(Glyph* a, Glyph* b);
 
-		GLuint _vbo;
-		GLuint _vao;
+		GLuint m_vbo;
+		GLuint m_vao;
 
-		GlyphSortType _sortType;
+		GlyphSortType m_sortType;
 
-		std::vector<Glyph*> _glyphPointers;
-		std::vector<Glyph> _glyphs;
-		std::vector<RenderBatch> _rederBatches;
+		std::vector<Glyph*> m_glyphPointers;
+		std::vector<Glyph> m_glyphs;
+		std::vector<RenderBatch> m_rederBatches;
 	};
 }

@@ -22,12 +22,12 @@ namespace KlaoudeEngine
 
 		bool isKeyPressed(unsigned int keyID);
 
-		glm::vec2 getMouseCoords() const { return _mouseCoords; }
+		glm::vec2 getMouseCoords() const { return m_mouseCoords; }
 	private:
 		bool wasKeyDown(unsigned int keyID);
 
-		std::unordered_map<unsigned int, bool> _keyMap;
-		std::unordered_map<unsigned int, bool> _previusKeyMap;
-		glm::vec2 _mouseCoords;
+		std::unordered_map<unsigned int, bool> m_keyMap;
+		std::unordered_map<unsigned int, bool> m_previusKeyMap;
+		glm::vec2 m_mouseCoords;
 	};
 }

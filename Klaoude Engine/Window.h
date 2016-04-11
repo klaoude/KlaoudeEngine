@@ -15,11 +15,11 @@ namespace KlaoudeEngine
 
 		void swapBuffer();
 
-		int getScreenWidth() { return _screenWidth; }
-		int getScreenHeight() { return _screenHeight; }
+		int getScreenWidth() { return m_screenWidth; }
+		int getScreenHeight() { return m_screenHeight; }
 
 	private:
-		SDL_Window* _sdlWindow;
-		int _screenWidth, _screenHeight;
+		SDL_Window* m_sdlWindow;
+		int m_screenWidth, m_screenHeight;
 	};
 }

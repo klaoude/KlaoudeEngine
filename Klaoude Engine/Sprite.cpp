@@ -7,26 +7,26 @@ namespace KlaoudeEngine
 {
 	Sprite::Sprite()
 	{
-		_vboID = 0;
+		m_vboID = 0;
 	}
 
 	Sprite::~Sprite()
 	{
-		if (_vboID != 0)
-			glDeleteBuffers(1, &_vboID);
+		if (m_vboID != 0)
+			glDeleteBuffers(1, &m_vboID);
 	}
 
 	void Sprite::init(float x, float y, float width, float height, std::string texturePath)
 	{
-		_x = x;
-		_y = y;
-		_witdh = width;
-		_height = height;
+		m_x = x;
+		m_y = y;
+		m_witdh = width;
+		m_height = height;
 
-		_texture = RessourceManager::getTexture(texturePath);
+		m_texture = RessourceManager::getTexture(texturePath);
 
-		if (_vboID == 0)
-			glGenBuffers(1, &_vboID);
+		if (m_vboID == 0)
+			glGenBuffers(1, &m_vboID);
 
 		Vertex vertexData[6];
 
@@ -57,7 +57,7 @@ namespace KlaoudeEngine
 
 		vertexData[4].setColor(125, 255, 125, 255);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _vboID);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertexData), vertexData, GL_STATIC_DRAW);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -65,9 +65,9 @@ namespace KlaoudeEngine
 
 	void Sprite::draw()
 	{
-		glBindTexture(GL_TEXTURE_2D, _texture.id);
+		glBindTexture(GL_TEXTURE_2D, m_texture.id);
 
-		glBindBuffer(GL_ARRAY_BUFFER, _vboID);
+		glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);

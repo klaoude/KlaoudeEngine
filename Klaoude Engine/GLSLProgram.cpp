@@ -7,7 +7,7 @@
 namespace KlaoudeEngine
 {
 
-	GLSLProgram::GLSLProgram() : _numAttributes(0), _programID(0), _vertexShaderID(0), _fragmentShaderID(0)
+	GLSLProgram::GLSLProgram() : m_numAttributes(0), m_programID(0), m_vertexShaderID(0), m_fragmentShaderID(0)
 	{
 
 	}
@@ -19,59 +19,59 @@ namespace KlaoudeEngine
 
 	void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragementShaderFilePath)
 	{
-		_programID = glCreateProgram();
+		m_programID = glCreateProgram();
 
-		_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-		if (_vertexShaderID == 0)
+		m_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
+		if (m_vertexShaderID == 0)
 			fatalError("Vertex shader dailed to be created");
 
-		_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-		if (_fragmentShaderID == 0)
+		m_fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
+		if (m_fragmentShaderID == 0)
 			fatalError("Fragment shader dailed to be created");
 
-		compileShader(vertexShaderFilePath, _vertexShaderID);
-		compileShader(fragementShaderFilePath, _fragmentShaderID);
+		compileShader(vertexShaderFilePath, m_vertexShaderID);
+		compileShader(fragementShaderFilePath, m_fragmentShaderID);
 	}
 
 	void GLSLProgram::linkShaders()
 	{
-		glAttachShader(_programID, _vertexShaderID);
-		glAttachShader(_programID, _fragmentShaderID);
+		glAttachShader(m_programID, m_vertexShaderID);
+		glAttachShader(m_programID, m_fragmentShaderID);
 
-		glLinkProgram(_programID);
+		glLinkProgram(m_programID);
 
 		GLint isLinked = 0;
-		glGetProgramiv(_programID, GL_LINK_STATUS, (int*)&isLinked);
+		glGetProgramiv(m_programID, GL_LINK_STATUS, (int*)&isLinked);
 		if (isLinked == GL_FALSE)
 		{
 			GLint maxLenght = 0;
-			glGetProgramiv(_programID, GL_INFO_LOG_LENGTH, &maxLenght);
+			glGetProgramiv(m_programID, GL_INFO_LOG_LENGTH, &maxLenght);
 
 			std::vector<char> infoLog(maxLenght);
-			glGetProgramInfoLog(_programID, maxLenght, &maxLenght, &infoLog[0]);
+			glGetProgramInfoLog(m_programID, maxLenght, &maxLenght, &infoLog[0]);
 
-			glDeleteShader(_programID);
-			glDeleteShader(_vertexShaderID);
-			glDeleteShader(_fragmentShaderID);
+			glDeleteShader(m_programID);
+			glDeleteShader(m_vertexShaderID);
+			glDeleteShader(m_fragmentShaderID);
 
 			std::printf("%s\n", &(infoLog[0]));
 			fatalError("Shaders failed to link !");
 		}
 
-		glDetachShader(_programID, _vertexShaderID);
-		glDetachShader(_programID, _fragmentShaderID);
-		glDeleteShader(_vertexShaderID);
-		glDeleteShader(_fragmentShaderID);
+		glDetachShader(m_programID, m_vertexShaderID);
+		glDetachShader(m_programID, m_fragmentShaderID);
+		glDeleteShader(m_vertexShaderID);
+		glDeleteShader(m_fragmentShaderID);
 	}
 
 	void GLSLProgram::addAttribute(const std::string& attributeName)
 	{
-		glBindAttribLocation(_programID, _numAttributes++, attributeName.c_str());
+		glBindAttribLocation(m_programID, m_numAttributes++, attributeName.c_str());
 	}
 
 	GLint GLSLProgram::getUniformLocation(const std::string& uniformName)
 	{
-		GLint location = glGetUniformLocation(_programID, uniformName.c_str());
+		GLint location = glGetUniformLocation(m_programID, uniformName.c_str());
 		if (location == GL_INVALID_INDEX)
 			fatalError("Uniform " + uniformName + " not found in shader !");
 		return location;
@@ -79,8 +79,8 @@ namespace KlaoudeEngine
 
 	void GLSLProgram::use()
 	{
-		glUseProgram(_programID);
-		for (int i = 0; i < _numAttributes; i++)
+		glUseProgram(m_programID);
+		for (int i = 0; i < m_numAttributes; i++)
 		{
 			glEnableVertexAttribArray(i);
 		}
@@ -89,7 +89,7 @@ namespace KlaoudeEngine
 	void GLSLProgram::unUse()
 	{
 		glUseProgram(0);
-		for (int i = 0; i < _numAttributes; i++)
+		for (int i = 0; i < m_numAttributes; i++)
 		{
 			glDisableVertexAttribArray(i);
 		}

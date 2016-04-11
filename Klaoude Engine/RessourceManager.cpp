@@ -2,10 +2,10 @@
 
 namespace KlaoudeEngine
 {
-	TextureCache RessourceManager::_textureCache;
+	TextureCache RessourceManager::m_textureCache;
 
 	GLTexture RessourceManager::getTexture(std::string texturePath)
 	{
-		return _textureCache.getTexture(texturePath);
+		return m_textureCache.getTexture(texturePath);
 	}
 }

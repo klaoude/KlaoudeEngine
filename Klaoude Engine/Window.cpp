@@ -14,12 +14,12 @@ namespace KlaoudeEngine
 		if (currentFlags & BORDERLESS)
 			flags |= SDL_WINDOW_BORDERLESS;
 
-		_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
+		m_sdlWindow = SDL_CreateWindow(windowName.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, screenWidth, screenHeight, SDL_WINDOW_OPENGL);
 
-		if (_sdlWindow == nullptr)
+		if (m_sdlWindow == nullptr)
 			fatalError("SDL window could not be created !");
 
-		SDL_GLContext glContex = SDL_GL_CreateContext(_sdlWindow);
+		SDL_GLContext glContex = SDL_GL_CreateContext(m_sdlWindow);
 		if (glContex == nullptr)
 			fatalError("SDL contex could not be created !");
 
@@ -41,6 +41,6 @@ namespace KlaoudeEngine
 
 	void Window::swapBuffer()
 	{
-		SDL_GL_SwapWindow(_sdlWindow);
+		SDL_GL_SwapWindow(m_sdlWindow);
 	}
 }

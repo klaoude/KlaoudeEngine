@@ -15,9 +15,9 @@ namespace KlaoudeEngine
 	private:
 		void calculateFPS();
 
-		float _maxFPS;
-		float _fps;
-		float _frameTime;
-		unsigned int _startTicks;		
+		float m_maxFPS;
+		float m_fps;
+		float m_frameTime;
+		unsigned int m_startTicks;		
 	};
 }
