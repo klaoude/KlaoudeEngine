@@ -42,6 +42,12 @@ namespace KlaoudeEngine
 
 	bool InputManager::isKeyPressed(unsigned int keyID)
 	{
-		
+		return isKeyDown(keyID) && !wasKeyDown(keyID);
+	}
+
+	bool InputManager::wasKeyDown(unsigned int keyID)
+	{
+		auto it = _previusKeyMap.find(keyID);
+		return it != _previusKeyMap.end() ? it->second : false;
 	}
 }

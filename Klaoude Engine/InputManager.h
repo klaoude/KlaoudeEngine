@@ -24,6 +24,8 @@ namespace KlaoudeEngine
 
 		glm::vec2 getMouseCoords() const { return _mouseCoords; }
 	private:
+		bool wasKeyDown(unsigned int keyID);
+
 		std::unordered_map<unsigned int, bool> _keyMap;
 		std::unordered_map<unsigned int, bool> _previusKeyMap;
 		glm::vec2 _mouseCoords;
