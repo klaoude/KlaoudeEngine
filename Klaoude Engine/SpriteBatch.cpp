@@ -22,7 +22,7 @@ namespace KlaoudeEngine
 
 	void SpriteBatch::begin(GlyphSortType sortType /* = GlyphSortType::TEXTURE */)
 	{
-		_sortType = sortType;
+		m_sortType = sortType;
 		m_rederBatches.clear();
 		m_glyphs.clear();
 	}
@@ -126,7 +126,7 @@ namespace KlaoudeEngine
 
 	void SpriteBatch::sortGlyph()
 	{
-		switch (_sortType)
+		switch (m_sortType)
 		{
 		case GlyphSortType::BACK_TO_FRONT:
 			std::stable_sort(m_glyphPointers.begin(), m_glyphPointers.end(), compareBackToFront);
