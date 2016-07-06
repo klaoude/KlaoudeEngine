@@ -247,3 +247,5 @@ GameEngine/
 /Klaoude Game + Engine.VC.db
 /Klaoude Game + Engine.sln
 /BallGine
+/Deps/Box2D_v2.3.0
+/Platformer

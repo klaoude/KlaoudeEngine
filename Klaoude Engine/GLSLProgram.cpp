@@ -99,10 +99,7 @@ namespace KlaoudeEngine
 	{
 		std::ifstream vertexFile(filePath);
 		if (vertexFile.fail())
-		{
-			perror(filePath.c_str());
 			fatalError("Failed to open " + filePath);
-		}
 
 		std::string fileContents = "";
 		std::string line;
