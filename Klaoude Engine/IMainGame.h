@@ -28,6 +28,8 @@ namespace KlaoudeEngine
 
 		const float getFps() const { return m_fps; }
 
+		InputManager inputManager;
+
 	protected:
 		virtual void update();
 		virtual void draw();		
@@ -40,6 +42,5 @@ namespace KlaoudeEngine
 		bool m_isRunning = false;
 		float m_fps = 0.0f;
 		Window m_window;
-		InputManager m_inputManager;
 	};
 }

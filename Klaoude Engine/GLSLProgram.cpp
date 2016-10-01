@@ -1,5 +1,6 @@
 #include "GLSLProgram.h"
 #include "Errors.h"
+#include "IOManager.h"
 
 #include <vector>
 #include <fstream>
@@ -19,6 +20,16 @@ namespace KlaoudeEngine
 
 	void GLSLProgram::compileShaders(const std::string& vertexShaderFilePath, const std::string& fragementShaderFilePath)
 	{
+		std::string fragSource, vertSource;
+
+		IOManager::readFileToBuffer(vertexShaderFilePath, vertSource);
+		IOManager::readFileToBuffer(fragementShaderFilePath, fragSource);
+
+		compileShadersFromSource(vertSource.c_str(), fragSource.c_str());
+	}
+
+	void GLSLProgram::compileShadersFromSource(const char* vertexSource, const char* fragmentSource)
+	{
 		m_programID = glCreateProgram();
 
 		m_vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -29,8 +40,8 @@ namespace KlaoudeEngine
 		if (m_fragmentShaderID == 0)
 			fatalError("Fragment shader dailed to be created");
 
-		compileShader(vertexShaderFilePath, m_vertexShaderID);
-		compileShader(fragementShaderFilePath, m_fragmentShaderID);
+		compileShader(vertexSource, "Vertex Shader", m_vertexShaderID);
+		compileShader(fragmentSource, "Fragment Shader", m_fragmentShaderID);
 	}
 
 	void GLSLProgram::linkShaders()
@@ -95,24 +106,15 @@ namespace KlaoudeEngine
 		}
 	}
 
-	void GLSLProgram::compileShader(const std::string& filePath, GLuint id)
+	void GLSLProgram::dispose()
 	{
-		std::ifstream vertexFile(filePath);
-		if (vertexFile.fail())
-			fatalError("Failed to open " + filePath);
+		if(m_programID)
+			glDeleteProgram(m_programID);
+	}
 
-		std::string fileContents = "";
-		std::string line;
-
-		while (std::getline(vertexFile, line))
-		{
-			fileContents += line + "\n";
-		}
-
-		vertexFile.close();
-
-		const char* contentPtr = fileContents.c_str();
-		glShaderSource(id, 1, &contentPtr, nullptr);
+	void GLSLProgram::compileShader(const char* source, const std::string& name, GLuint id)
+	{
+		glShaderSource(id, 1, &source, nullptr);
 
 		glCompileShader(id);
 
@@ -130,7 +132,7 @@ namespace KlaoudeEngine
 			glDeleteShader(id);
 
 			std::printf("%s\n", &(errorLog[0]));
-			fatalError("Shader " + filePath + " failed to compile");
+			fatalError("Shader " + name + " failed to compile");
 		}
 	}
 }

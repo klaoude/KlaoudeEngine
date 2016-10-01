@@ -13,6 +13,8 @@ namespace KlaoudeEngine {
 
 		void compileShaders(const std::string& vertexShaderFilePath, const std::string& fragementShaderFilePath);
 
+		void compileShadersFromSource(const char* vertexSource, const char* fragmentSource);
+
 		void linkShaders();
 
 		void addAttribute(const std::string& attributeName);
@@ -22,10 +24,11 @@ namespace KlaoudeEngine {
 		void use();
 		void unUse();
 
+		void dispose();
 	private:
 		int m_numAttributes;
 
-		void compileShader(const std::string& filePath, GLuint id);
+		void compileShader(const char* source, const std::string& name, GLuint id);
 
 		GLuint m_programID;
 
