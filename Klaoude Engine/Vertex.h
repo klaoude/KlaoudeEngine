@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glew\glew.h>
+#include <glew/glew.h>
 namespace KlaoudeEngine
 {
 	struct Position

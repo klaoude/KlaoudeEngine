@@ -1,5 +1,5 @@
 #pragma once
-#include <glew\glew.h>
+#include <glew/glew.h>
 #include "GLTexture.h"
 #include "RessourceManager.h"
 

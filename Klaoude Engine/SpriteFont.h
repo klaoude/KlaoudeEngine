@@ -24,7 +24,7 @@
 #ifndef SpriteFont_h__
 #define SpriteFont_h__
 
-#include <SDL/SDL_ttf.h>
+#include <SDL_ttf.h>
 #include <glm/glm.hpp>
 #include <map>
 #include <vector>

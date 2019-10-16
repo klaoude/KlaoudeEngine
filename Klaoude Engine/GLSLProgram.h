@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include <glew\glew.h>
+#include <glew/glew.h>
 
 namespace KlaoudeEngine {
 

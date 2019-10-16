@@ -1,6 +1,6 @@
 #pragma once
-#include <SDL/SDL.h>
-#include <glew\glew.h>
+#include <SDL.h>
+#include <glew/glew.h>
 
 #include <string>
 
