@@ -2,6 +2,7 @@
 #include "GLTexture.h"
 
 #include <map>
+#include <string>
 
 namespace KlaoudeEngine
 {
